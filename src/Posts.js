@@ -15,7 +15,7 @@ function Posts(props) {
     })
 
     return (
-        <div>
+        <div className='gridContainer'>
             { 
                 props.pending ? 
                 <h3 style={{color: "blue"}} >Wait, fetching the data</h3> :      
