@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import EditPost from './EditPost'
 import { deletePost, editPost } from './actions'
+//Modal
+import Modal from 'react-modal'  
+//Modal
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -14,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import Img from './sweden.png'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import SaveIcon from '@material-ui/icons/Save';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -21,12 +25,33 @@ const useStyles = makeStyles({
   media: {
     height: 260,
   },
-});
-// material ui
 
+});
+
+// material ui
+// modal-styles
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+// modal-styles
 
 function IndividualPost(props) {
     const [viewForm, setViewForm] = useState(false)
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [form, setForm] = useState({ title: '', body: '' })
+
+    const handleSubmit = (e) => {
+        // e.preventDefault()
+        props.editPost(props.id, form.title, form.body)
+        setModalIsOpen(false)
+    }
     const id = props.id
     const handleForm = () => {
         setViewForm(!viewForm)
@@ -38,30 +63,18 @@ function IndividualPost(props) {
 
 
     return (
-        // <div>
-        //     <h3>{props.title}</h3>
-        //     <p>{props.body}</p>
-        //     <button onClick={() => props.deletePost(id)}>Delete</button>
-        //     <button onClick={handleForm}>Edit</button>
-        //     {
-        //         viewForm ?
-        //         <EditPost id={id} handleForm={handleForm} /> :
-        //         null
-        //     }
-        //     <br/>
-            
-        // </div>
+    <div> 
 
 
-    // material ui
+    {/* material ui */}
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
+        {/* <CardMedia
           className={classes.media}
           src={Img}
           component="img"
-          title="Contemplative Reptile"
-        />
+          title="Card Image"
+        /> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.title}
@@ -71,11 +84,14 @@ function IndividualPost(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button variant="contained" color="secondary" size="small" startIcon={<DeleteIcon />} onClick={() => props.deletePost(id)}>
+      <CardActions >
+        <Button style={{margin: '0 auto'}} variant="outlined" color="secondary" size="small" startIcon={<DeleteIcon />} onClick={() => props.deletePost(id)}>
           Delete
         </Button>
-        <Button variant="contained" color="primary" size="small" startIcon={<EditIcon />} onClick={handleForm}>
+        {/* <Button color="primary" size="small" startIcon={<EditIcon />} onClick={handleForm}>
+          Edit
+        </Button> */}
+        <Button style={{margin: '0 auto'}} variant="outlined" color="primary" size="small" startIcon={<EditIcon />} onClick={() => setModalIsOpen(true)}>
           Edit
         </Button>
       </CardActions>
@@ -85,7 +101,33 @@ function IndividualPost(props) {
        null
       }
     </Card>
-    // material ui
+    {/* material ui */}
+
+    {/* //Modal */}
+    <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
+            <form onSubmit={handleSubmit} className="form">
+                <div className="title">
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" id="title" name="title" value={form.title}
+                    onChange={e => setForm({...form, title: e.target.value})}
+                    />
+                </div>
+                <div className="title">
+                    <label htmlFor="body">Body:</label>
+                    <textarea id="body" name="body" value={form.body}
+                    onChange={e => setForm({...form, body: e.target.value})}
+                    />
+                </div>
+                {/* <button>Update</button> */}
+                <Button className='btn' variant="contained" color="primary" size="small" startIcon={<SaveIcon />} onClick={handleSubmit}>Save</Button>
+            </form>
+    </Modal>
+
+
+    {/* //Modal */}
+
+    </div> 
+
     )
 }
 

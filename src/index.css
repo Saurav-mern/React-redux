@@ -18,5 +18,34 @@ code {
   justify-content: space-evenly;
   align-content: center;
   grid-gap: 50px 100px;
+  text-align: center;
 }
+
+.title > input[type=text] {
+  width: 100%;
+  padding: 8px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #006400;
+  border-radius: 4px;
+  
+}
+input[type=text]:focus {
+  border: 3px solid rgb(36, 99, 83);
+}
+textarea {
+  width: 100%;
+  height: 50px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #006400;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+.form > .btn {
+  margin-top: 10px;
+}
+
 

@@ -1,6 +1,14 @@
 import React from 'react'
 import IndividualPost from './IndividualPost'
 import { connect } from 'react-redux'
+import { BarLoader } from 'react-spinners'
+import { css } from '@emotion/react'
+
+const loaderCSS = css`
+    margin-left: 33vw;
+    width: 200px;
+    
+`
 
 
 function Posts(props) {
@@ -18,7 +26,10 @@ function Posts(props) {
         <div className='gridContainer'>
             { 
                 props.pending ? 
-                <h3 style={{color: "blue"}} >Wait, fetching the data</h3> :      
+                // <h3 style={{color: "#006400", position:'relative', left: '370px',}} >Wait, fetching the data... </h3> 
+                <BarLoader color="#006400" css={loaderCSS} loading/>
+                
+                :      
                 postView
             }
             

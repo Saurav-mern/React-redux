@@ -9,15 +9,16 @@ import { bindActionCreators } from 'redux';
 
 function App1(props) {
 
-const postsView = props.posts.map((post) => {
-  return (
-    <div>
-    <h3>{post.title}</h3>
-    <p>{post.body}</p>
-    <button onClick={() => props.deletePost(post.id)}>Delete</button>
-    </div>
-  )
-})
+// const postsView = props.posts.map((post) => {
+//   return (
+//     <div>
+//     <h3>{post.title}</h3>
+//     <p>{post.body}</p>
+//     <button onClick={() => props.deletePost(post.id)}>Delete</button>
+//     </div>
+//   )
+// })
+
 
 const dispatch = useDispatch()
 
@@ -31,7 +32,7 @@ useEffect(() => {
 
   return (
     <div className="App">
-      <h1 style={{color: "#006400"}}>Hello from App1.js</h1>
+      {/* <h1 style={{color: "#006400"}}>Hello from App1.js</h1>
       <h3>Count: {props.counter}</h3>
 
       <button onClick={() => props.increment()}>+1</button>
@@ -47,11 +48,11 @@ useEffect(() => {
         <div>I am afraid you will have to login to see this.</div> 
       }
       <br/>
-      <br/>
-      <h1 style={{color: "#006400"}}>Posts from JSONplaceholder</h1>
+      <br/> */}
+      <h1 style={{color: "#006400"}}>Posts from JSONPlaceholder</h1>
       
       <Posts />
-
+    
     </div>
   );
 }
