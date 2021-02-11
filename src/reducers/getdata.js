@@ -8,7 +8,7 @@ const initialState = {
 const getdata = (state=initialState, action) => {
     switch(action.type) {
         case 'FETCH_POST':
-            console.log(action.payload)
+            // console.log(action.payload)
             return {
                 ...state,
                 pending:false,
@@ -21,7 +21,7 @@ const getdata = (state=initialState, action) => {
                 posts: newPosts
             }
         case 'EDIT_POST':
-            console.log('we are in reducer now', action.payload)
+            // console.log('we are in reducer now', action.payload)
             const editedPost = state.posts.map((post) => {
                 if(post.id == action.payload.id){
                     return {
